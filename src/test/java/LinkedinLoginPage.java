@@ -7,19 +7,9 @@ public class LinkedinLoginPage
 {
     private WebDriver webDriver;
 
-/*    public LinkedinLoginPage(WebDriver webDriver)
-    {
-        this.webDriver = webDriver;
-        loginField = webDriver.findElement(By.id("login-email"));
-        passwordField = webDriver.findElement(By.id("login-password"));
-        signInButton = webDriver.findElement(By.id("login-submit"));
-    }
-
-    */
-
     private WebElement loginField;
     private WebElement passwordField;
-    private  WebElement signInButton;
+    private WebElement signInButton;
 
     public LinkedinLoginPage(WebDriver webDriver)
     {
@@ -34,12 +24,6 @@ public class LinkedinLoginPage
         signInButton = webDriver.findElement(By.id("login-submit"));
     }
 
-/*    public boolean isSignInButtonDisplayed()
-    {
-        Assert.assertTrue(signInButton.isDisplayed(), "signInButton isn't displayed");
-        return true;
-    }
-*/
     public void login(String email, String password)
     {
         loginField.sendKeys(email);
@@ -47,4 +31,18 @@ public class LinkedinLoginPage
         signInButton.click();
     }
 
+    public boolean isSignInButtonDisplayed()
+    {
+        return signInButton.isDisplayed();
+    }
+
+    public String getCurrentUrl()
+    {
+        return webDriver.getCurrentUrl();
+    }
+
+    public String getCurrentTitle()
+    {
+        return webDriver.getTitle();
+    }
 }

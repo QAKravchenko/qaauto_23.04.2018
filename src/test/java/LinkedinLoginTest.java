@@ -34,7 +34,7 @@ public class LinkedinLoginTest
                 "Login page Title is wrong!");
 
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
-//        linkedinLoginPage.isSignInButtonDisplayed();
+        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed());
         linkedinLoginPage.login("skravchenko@adyax.com", "adyax11");
         sleep(3000);
 
@@ -60,25 +60,37 @@ public class LinkedinLoginTest
     @Test
     public void successfulLoginTest() throws InterruptedException
     {
-        String actualPageTitle = webDriver.getTitle();
-
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
-//      linkedinLoginPage.isSignInButtonDisplayed();
-        linkedinLoginPage.login("skravchenko@adyax.com", "adyax111");
-        sleep(3000);
 
-
-// Checking the title of the page is "LinkedIn: Log In or Sign Up"
-/*        Assert.assertEquals(webDriver.getTitle(),
-                "Sign In to LinkedIn",
+//      Checking the title of the page is "LinkedIn: Log In or Sign Up"
+        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),
+                "LinkedIn: Log In or Sign Up",
                 "Login-Submit page Title is wrong!");
 
 //Checking URL is "https://www.linkedin.com/"
-        Assert.assertEquals(webDriver.getCurrentUrl(),
-                "https://www.linkedin.com/uas/login-submit",
+        Assert.assertEquals(linkedinLoginPage.getCurrentUrl(),
+                "https://www.linkedin.com/",
                 "Login-Submit page URL is wrong!");
-                */
 
+        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(),
+                "Sign in button isn't displayed!!!");
+        linkedinLoginPage.login("skravchenko@adyax.com", "adyax111");
+
+        sleep(3000);
+
+        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
+
+        Assert.assertEquals(linkedinHomePage.getCurrentUrl(),
+                "https://www.linkedin.com/feed/",
+                "Home page URL is wrong!");
+
+        Assert.assertEquals(linkedinHomePage.getCurrentTitle(),
+                "LinkedIn",
+                "Title is wrong!");
+
+        //String actualHomePageTitle = linkedinLoginPage.
+
+        sleep(3000);
     }
 
     @AfterMethod
