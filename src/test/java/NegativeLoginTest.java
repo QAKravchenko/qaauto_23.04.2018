@@ -3,23 +3,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static java.lang.Thread.sleep;
 
-public class NegativeLoginTest {
+public class NegativeLoginTest
+{
+    WebDriver webDriver;
 
-    @Test
-    public void successfulLoginTest() throws InterruptedException {
-
-        WebDriver webDriver = new ChromeDriver();
+    @BeforeMethod
+    public void before()
+    {
+        webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
 
         webDriver.get("https://www.linkedin.com/");
+    }
 
-        WebElement loginField = webDriver.findElement(By.id("login-email"));
-        WebElement passwordField = webDriver.findElement(By.id("login-password"));
-        WebElement signInButton = webDriver.findElement(By.id("login-submit"));
+    @Test
+    public void successfulLoginTest() throws InterruptedException
+    {
+//        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage();
+//        linkedinLoginPage.login("skravchenko@adyax.com", "adyax111");
 
 // Checking the title of the page is "LinkedIn: Log In or Sign Up"
         Assert.assertEquals(webDriver.getTitle(),
@@ -32,8 +37,9 @@ public class NegativeLoginTest {
                 "Homepage URL is wrong!");
 
 // Checking "Login" field is displayed on "Login" page
-        Assert.assertTrue(loginField.isDisplayed(), "Login field isn't displayed!");
+//        Assert.assertTrue(loginField.isDisplayed(), "Login field isn't displayed!");
 
+/*
 // NEGATIVE TEST CASES FOR LOGIN
         // 1 case
         signInButton.click();
@@ -104,9 +110,48 @@ public class NegativeLoginTest {
         Assert.assertNotEquals(webDriver.getCurrentUrl(),
                 "https://www.linkedin.com/feed/",
                 "Login successful !!!");
+*/
 
-        webDriver.close();
 
     }
 
+    @Test
+    public void negativeLoginTest() throws InterruptedException {
+
+        String actualLoginPageTitle = webDriver.getTitle();
+
+        Assert.assertEquals(actualLoginPageTitle,
+                "LinkedIn: Log In or Sign Up",
+                "Login page Title is wrong!");
+
+        WebElement loginField = webDriver.findElement(By.id("login-email"));
+        WebElement passwordField = webDriver.findElement(By.id("login-password"));
+        WebElement signInButton = webDriver.findElement(By.id("login-submit"));
+
+        loginField.sendKeys("skravchenko@adyax.com");
+        passwordField.sendKeys("adyax11");
+        signInButton.click();
+        sleep(3000);
+
+        String currentPageUrl = webDriver.getCurrentUrl();
+        String currentPageTitle = webDriver.getTitle();
+
+        Assert.assertEquals(currentPageUrl,
+                "https://www.linkedin.com/uas/login-submit",
+                "Login-Submit page URL is wrong");
+        Assert.assertEquals(currentPageTitle,
+                "Sign In to LinkedIn",
+                "Login-Submit page Title is wrong");
+        WebElement errorMessage = webDriver.findElement(By.xpath("//div[@role='alert']"));
+
+        Assert.assertEquals(errorMessage.getText(),
+                "There were one or more errors in your submission. Please correct the marked fields below.",
+                "Wrong error message text displayed");
+}
+
+    @AfterMethod
+    public void after()
+    {
+        webDriver.close();
+    }
 }
