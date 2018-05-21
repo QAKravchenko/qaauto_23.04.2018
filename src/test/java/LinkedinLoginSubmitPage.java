@@ -2,10 +2,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LinkedinLoginSubmitPage
+public class LinkedinLoginSubmitPage extends LinkedinBasePage
 {
-    private WebDriver webDriver;
-
+    private WebElement emailField;
     private WebElement submitEmailField;
     private WebElement submitPasswordField;
     private WebElement submitSignInButton;
@@ -15,12 +14,13 @@ public class LinkedinLoginSubmitPage
 
     public LinkedinLoginSubmitPage(WebDriver webDriver)
     {
-        this.webDriver = webDriver;
+        super(webDriver);
         initElements();
     }
 
     public void initElements()
     {
+        emailField = webDriver.findElement(By.id("session_key-login"));
         submitEmailField = webDriver.findElement(By.id("session_key-login"));
         submitPasswordField = webDriver.findElement(By.id("session_password-login"));
         submitSignInButton = webDriver.findElement(By.id("btn-primary"));
@@ -34,16 +34,6 @@ public class LinkedinLoginSubmitPage
         submitEmailField.sendKeys(email);
         submitPasswordField.sendKeys(password);
         submitSignInButton.click();
-    }
-
-    public String getCurrentPageTitle()
-    {
-        return webDriver.getTitle();
-    }
-
-    public String getCurrentUrl()
-    {
-        return webDriver.getCurrentUrl();
     }
 
     public boolean isSignInButtonDisplayed()
@@ -74,5 +64,10 @@ public class LinkedinLoginSubmitPage
     public String isErrorPasswordMessageDisplayed()
     {
         return errorPasswordMessage.getText();
+    }
+
+    public boolean isPageLoaded()
+    {
+        return emailField.isDisplayed();
     }
 }

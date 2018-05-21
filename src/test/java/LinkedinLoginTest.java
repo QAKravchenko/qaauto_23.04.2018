@@ -3,6 +3,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static java.lang.Thread.sleep;
@@ -22,9 +23,18 @@ public class LinkedinLoginTest
         sleep(2000);
     }
 
+    @DataProvider
+    public Object[][] validDataProvider()
+    {
+        return new Object[][]
+        {
+          {"skravchenko@adyax.com","adyax111"},
+          {"SKRAVCHENKO@ADYAX.COM","adyax111"}
+        };
+    }
 
     @Test
-    public void negativeLoginTestWrongPassword() throws InterruptedException
+    public void negativeReturnedToLoginSubmitPage() throws InterruptedException
     {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
@@ -33,13 +43,16 @@ public class LinkedinLoginTest
 
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
 
-        Assert.assertEquals(linkedinLoginSubmitPage.getCurrentPageTitle(),
+        Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(),
                 "Sign In to LinkedIn",
                 "Login Submit page Title is wrong!!!");
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentUrl(),
                 "https://www.linkedin.com/uas/login-submit",
                 "Login Submit page Url is wrong!!!");
+
+        Assert.assertTrue(linkedinLoginSubmitPage.isPageLoaded(),
+                "Login submit page isn't loaded");
 
         Assert.assertEquals(linkedinLoginSubmitPage.errorMessageText(),
                 "There were one or more errors in your submission. Please correct the marked fields below.",
@@ -106,7 +119,7 @@ public class LinkedinLoginTest
 
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
 
-        Assert.assertEquals(linkedinLoginSubmitPage.getCurrentPageTitle(),
+        Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(),
                 "Sign In to LinkedIn",
                 "Login Submit page Title is wrong!!!");
 
@@ -138,8 +151,8 @@ public class LinkedinLoginTest
     }
 
 
-    @Test
-    public void successfulLoginTest() throws InterruptedException
+    @Test(dataProvider = "validDataProvider")
+    public void successfulLoginTest(String email, String password) throws InterruptedException
     {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
@@ -153,7 +166,7 @@ public class LinkedinLoginTest
 
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(),
                 "Sign in button isn't displayed!!!");
-        linkedinLoginPage.login("skravchenko@adyax.com", "adyax111");
+        linkedinLoginPage.login(email, password);
 
         sleep(3000);
 
