@@ -56,12 +56,22 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage
         return submitPasswordField.isDisplayed();
     }
 
-    public String isErrorEmailMessageDisplayed()
+    public boolean isErrorEmailMessageDisplayed()
+    {
+        return errorEmailMessage.isDisplayed();
+    }
+
+    public String isErrorEmailMessageTextDisplayed()
     {
         return errorEmailMessage.getText();
     }
 
-    public String isErrorPasswordMessageDisplayed()
+    public boolean isErrorPasswordMessageDisplayed()
+    {
+        return errorPasswordMessage.isDisplayed();
+    }
+
+    public String isErrorPasswordMessageTextDisplayed()
     {
         return errorPasswordMessage.getText();
     }
