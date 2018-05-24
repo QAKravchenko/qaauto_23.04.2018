@@ -1,32 +1,36 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LinkedinLoginSubmitPage extends LinkedinBasePage
 {
+    @FindBy(id = "session_key-login")
     private WebElement emailField;
+
+    @FindBy(id = "session_key-login")
     private WebElement submitEmailField;
+
+    @FindBy(id = "session_password-login")
     private WebElement submitPasswordField;
+
+    @FindBy(id = "btn-primary")
     private WebElement submitSignInButton;
+
+    @FindBy(xpath = "//div[@role='alert']")
     private WebElement errorMessage;
+
+    @FindBy(id = "session_key-login-error")
     private WebElement errorEmailMessage;
+
+    @FindBy(id = "session_password-login-error")
     private WebElement errorPasswordMessage;
 
     public LinkedinLoginSubmitPage(WebDriver webDriver)
     {
         super(webDriver);
-        initElements();
-    }
-
-    public void initElements()
-    {
-        emailField = webDriver.findElement(By.id("session_key-login"));
-        submitEmailField = webDriver.findElement(By.id("session_key-login"));
-        submitPasswordField = webDriver.findElement(By.id("session_password-login"));
-        submitSignInButton = webDriver.findElement(By.id("btn-primary"));
-        errorMessage = webDriver.findElement(By.xpath("//div[@role='alert']"));
-        errorEmailMessage = webDriver.findElement(By.id("session_key-login-error"));
-        errorPasswordMessage = webDriver.findElement(By.id("session_password-login-error"));
+        PageFactory.initElements(webDriver,this);
     }
 
     public void login(String email, String password)

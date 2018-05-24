@@ -10,7 +10,7 @@ import static java.lang.Thread.sleep;
 
 public class LinkedinLoginTest
 {
-    WebDriver webDriver;
+    private WebDriver webDriver;
 
     @BeforeMethod
     public void before() throws InterruptedException
@@ -62,7 +62,7 @@ public class LinkedinLoginTest
     }
 
     @Test(dataProvider = "invalidDataProviderLoginPage")
-    public void negativeLoginTestEmptyEmailAndPasswordFields(String email, String password) throws InterruptedException
+    public void negativeTestLoginPageEmptyEmailAndPasswordFields(String email, String password) throws InterruptedException
     {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
@@ -79,14 +79,14 @@ public class LinkedinLoginTest
     }
 
     @Test(dataProvider = "invalidDataProviderLoginSubmitPage")
-    public void negativeReturnedToLoginSubmitPage(String email, String password) throws InterruptedException
+    public void negativeTestReturnedToLoginSubmitPage(String email, String password) throws InterruptedException
     {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
         linkedinLoginPage.login(email, password);
         sleep(3000);
 
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.login(email, password);
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(),
                 "Sign In to LinkedIn",
@@ -143,10 +143,9 @@ public class LinkedinLoginTest
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(),
                 "Sign in button isn't displayed!!!");
 
-        linkedinLoginPage.login(email, password);
+        LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(email, password);
         sleep(3000);
-
-        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
+      //  LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
 
         Assert.assertEquals(linkedinHomePage.getCurrentUrl(),
                 "https://www.linkedin.com/feed/",
