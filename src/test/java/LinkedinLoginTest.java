@@ -83,10 +83,8 @@ public class LinkedinLoginTest
     {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
-        linkedinLoginPage.login(email, password);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.loginSubmitPage(email, password);
         sleep(3000);
-
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.login(email, password);
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(),
                 "Sign In to LinkedIn",
