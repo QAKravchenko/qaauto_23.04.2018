@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -6,6 +5,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LinkedinLoginSubmitPage extends LinkedinBasePage
 {
+    public LinkedinLoginSubmitPage(WebDriver webDriver)
+    {
+        super(webDriver);
+        PageFactory.initElements(webDriver,this);
+    }
+
     @FindBy(id = "session_key-login")
     private WebElement emailField;
 
@@ -27,15 +32,11 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage
     @FindBy(id = "session_password-login-error")
     private WebElement errorPasswordMessage;
 
-    public LinkedinLoginSubmitPage(WebDriver webDriver)
-    {
-        super(webDriver);
-        PageFactory.initElements(webDriver,this);
-    }
-
     public void login(String email, String password)
     {
+        submitEmailField.clear();
         submitEmailField.sendKeys(email);
+        submitPasswordField.clear();
         submitPasswordField.sendKeys(password);
         submitSignInButton.click();
     }
