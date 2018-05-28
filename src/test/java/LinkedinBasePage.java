@@ -1,10 +1,10 @@
 import org.openqa.selenium.WebDriver;
 
-public class LinkedinBasePage
+public abstract class LinkedinBasePage
 {
     protected WebDriver webDriver;
 
-    public LinkedinBasePage(WebDriver webDriver)
+    public  LinkedinBasePage(WebDriver webDriver)
     {
         this.webDriver = webDriver;
     }
@@ -18,4 +18,8 @@ public class LinkedinBasePage
     {
         return webDriver.getTitle();
     }
+
+    abstract boolean isPageLoaded();
+
+
 }

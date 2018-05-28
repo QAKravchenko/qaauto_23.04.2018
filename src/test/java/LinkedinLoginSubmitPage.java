@@ -8,7 +8,6 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage
     public LinkedinLoginSubmitPage(WebDriver webDriver)
     {
         super(webDriver);
-        PageFactory.initElements(webDriver,this);
     }
 
     @FindBy(id = "session_key-login")
@@ -31,6 +30,11 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage
 
     @FindBy(id = "session_password-login-error")
     private WebElement errorPasswordMessage;
+
+    public boolean isPageLoaded()
+    {
+        return errorMessage.isDisplayed();
+    }
 
     public void login(String email, String password)
     {
@@ -79,10 +83,5 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage
     public String isErrorPasswordMessageTextDisplayed()
     {
         return errorPasswordMessage.getText();
-    }
-
-    public boolean isPageLoaded()
-    {
-        return emailField.isDisplayed();
     }
 }
