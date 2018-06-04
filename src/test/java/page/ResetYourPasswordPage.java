@@ -3,10 +3,11 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class ChooseNewPasswordPage extends LinkedinBasePage
+public class ResetYourPasswordPage extends BasePage
 {
-    public ChooseNewPasswordPage(WebDriver webDriver)
+    public ResetYourPasswordPage(WebDriver webDriver)
     {
         super(webDriver);
     }
@@ -23,5 +24,13 @@ public class ChooseNewPasswordPage extends LinkedinBasePage
     public boolean isPageLoaded()
     {
         return newPasswordField.isDisplayed();
+    }
+
+    public SuccessfullyResetYourPasswordPage submitNewPassword(String newUserPassword)
+    {
+        newPasswordField.sendKeys(newUserPassword);
+        confirmPasswordField.sendKeys(newUserPassword);
+        resetPasswordSubmitButton.click();
+        return PageFactory.initElements(webDriver, SuccessfullyResetYourPasswordPage.class);
     }
 }

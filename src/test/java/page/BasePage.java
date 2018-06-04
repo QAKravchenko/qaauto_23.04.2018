@@ -2,11 +2,11 @@ package page;
 
 import org.openqa.selenium.WebDriver;
 
-public abstract class LinkedinBasePage
+public abstract class BasePage
 {
     protected WebDriver webDriver;
 
-    public  LinkedinBasePage(WebDriver webDriver)
+    public BasePage(WebDriver webDriver)
     {
         this.webDriver = webDriver;
     }
@@ -22,5 +22,4 @@ public abstract class LinkedinBasePage
     }
 
     abstract boolean isPageLoaded();
-
 }

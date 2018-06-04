@@ -1,6 +1,7 @@
 package util;
 
 import com.sun.mail.imap.IdleManager;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.mail.*;
 import javax.mail.event.MessageCountAdapter;
@@ -26,13 +27,15 @@ public class GMailService {
      * @param args - dummy args for main()
      */
     public static void main(String[] args) {
-        String messageSubject = "Lesson 10";
+        String messageSubject = "Tester, данное сообщение содержит ссылку для изменения пароля";
         String messageTo = "skravchenko@adyax.com";
-        String messageFrom = "skravchenko@adyax.com";
+        String messageFrom = "security-noreply@linkedin.com";
 
         GMailService gMailService = new GMailService();
         gMailService.connect();
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 10);
+        String resetPasswordLink = StringUtils.substringBetween(message, "To change your LinkedIn password, click <a href=\"", "\" style").replace("&amp;","&");
+        System.out.println("Content: " + resetPasswordLink);
         System.out.println("Content: " + message);
     }
 
@@ -175,5 +178,4 @@ public class GMailService {
 
         return null;
     }
-
 }

@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LinkedinLoginSubmitPage extends LinkedinBasePage
+public class LoginSubmitPage extends BasePage
 {
-    public LinkedinLoginSubmitPage(WebDriver webDriver)
+    public LoginSubmitPage(WebDriver webDriver)
     {
         super(webDriver);
     }
@@ -37,12 +37,12 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage
         return errorMessage.isDisplayed();
     }
 
-    public void login(String email, String password)
+    public void login()
     {
         submitEmailField.clear();
-        submitEmailField.sendKeys(email);
+        submitEmailField.sendKeys("skravchenko@adyax.com");
         submitPasswordField.clear();
-        submitPasswordField.sendKeys(password);
+        submitPasswordField.sendKeys("P@ssword2");
         submitSignInButton.click();
     }
 

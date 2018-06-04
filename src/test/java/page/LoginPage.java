@@ -5,10 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static java.lang.Thread.sleep;
 
-public class LinkedinLoginPage extends LinkedinBasePage
+
+public class LoginPage extends BasePage
 {
-    public LinkedinLoginPage(WebDriver webDriver)
+    public LoginPage(WebDriver webDriver)
     {
         super(webDriver);
         PageFactory.initElements(webDriver,this);
@@ -32,45 +34,50 @@ public class LinkedinLoginPage extends LinkedinBasePage
         return signInButton.isDisplayed();
     }
 
-    public LinkedinHomePage login(String email, String password)
+    public HomePage login(String email, String password)
     {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         signInButton.click();
-        return PageFactory.initElements(webDriver, LinkedinHomePage.class);
+        return PageFactory.initElements(webDriver, HomePage.class);
     }
 
-    public LinkedinLoginSubmitPage loginSubmitPage(String email, String password)
+    public LoginSubmitPage loginSubmitPage(String email, String password)
     {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         signInButton.click();
-        return PageFactory.initElements(webDriver, LinkedinLoginSubmitPage.class);
+        return PageFactory.initElements(webDriver, LoginSubmitPage.class);
     }
 
-    public LinkedinResetPasswordPage forgotPasswordLink()
+    public ResetPasswordPage clickOnForgotPasswordLink()
     {
         forgotPasswordLink.click();
-        return PageFactory.initElements(webDriver, LinkedinResetPasswordPage.class);
+        return PageFactory.initElements(webDriver, ResetPasswordPage.class);
     }
 
-    public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink()
+    public void successfulLoginWithNewPassword(String userEmail, String newUserPassword) throws InterruptedException
     {
-
+        emailField.sendKeys(userEmail);
+        passwordField.sendKeys(newUserPassword);
+        signInButton.click();
+        sleep(3000);
     }
 
 
-/*    public <T> T login(String email, String password)
+    //Example, how to return one of three pages
+ /*
+    public <T> T login(String email, String password)
     {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         signInButton.click();
 
         if (getCurrentUrl().contains("/feed"))
-        {return  (T) new page.LinkedinHomePage(webDriver);}
+        {return  (T) new page.HomePage(webDriver);}
 
         if (getCurrentUrl().contains("/login-submit"))
-        {return  (T) new page.LinkedinLoginSubmitPage(webDriver);}
+        {return  (T) new page.LoginSubmitPage(webDriver);}
 
         else {return (T) this;}
     }
