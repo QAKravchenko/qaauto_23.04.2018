@@ -8,9 +8,6 @@ import static java.lang.Thread.sleep;
 
 public class ResetPasswordTest extends BaseTest
 {
-    String userEmail = "skravchenko@adyax.com";
-    String newUserPassword = "P@ssword2";
-
     @Test
     public void successfullPaswordResetTest() throws InterruptedException
     {

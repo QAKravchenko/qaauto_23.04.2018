@@ -1,9 +1,7 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
 
@@ -24,12 +22,12 @@ public class BadCodeExample
 
         // First variant. By clicking on button
          WebElement searchButton = webDriver.findElement(By.xpath("//input[@type='button' and contains(@value,'Google')]"));
-        // searchButton.click();
+        searchButton.click();
 
         //Second variant. By pressing on "Enter" button on keyboard
-        searchField.sendKeys(Keys.ENTER);
+        //searchField.sendKeys(Keys.ENTER);
 
-        for (int i=1; i<=10; i++)
+/*        for (int i=1; i<=10; i++)
         {
             WebElement searchResult = webDriver.findElement(By.xpath("//div[@class='srg']/div[" + i + "]"));
             String searchResultText = searchResult.getText();
@@ -39,13 +37,13 @@ public class BadCodeExample
                 System.out.println("SearchTerm found!!");
             }
             System.out.println(searchResultText);
-        }
+        }*/
 
 
 
         //If 10 wasn't displayed according to this !!!System.out.println(searchResultsnew.size());!!! need to add sleep (3000); after !!!searchField.sendKeys(Keys.ENTER);!!!
         //Founding all search results blocks
-/*        List<WebElement> searchResults = webDriver.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
+        List<WebElement> searchResults = webDriver.findElements(By.xpath("//ul[@class='search-results__list list-style-none']//li[@class='search-result search-result__occluded-item ember-view']"));
         System.out.println(searchResults.size());
 
         for (WebElement searchResult : searchResults)
@@ -57,7 +55,7 @@ public class BadCodeExample
             }
             System.out.println(searchResultText);
         }
-*/
+
 
 /*
         //Founding each search result block and printing out the text

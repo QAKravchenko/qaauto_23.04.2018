@@ -12,6 +12,8 @@ public class BaseTest
 {
     WebDriver webDriver;
     LoginPage loginPage;
+    String userEmail = "skravchenko@adyax.com";
+    String newUserPassword = "P@ssword2";
 
     @BeforeMethod
     public void before() throws InterruptedException
