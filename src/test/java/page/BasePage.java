@@ -12,6 +12,10 @@ public abstract class BasePage
     protected WebDriver webDriver;
     protected static GMailService gMailService = new GMailService();
 
+    /**
+     * Constructor of BasePage
+     * @param webDriver - webDriver instance
+     */
     public BasePage(WebDriver webDriver)
     {
         this.webDriver = webDriver;
@@ -32,7 +36,14 @@ public abstract class BasePage
     public WebElement waitUntilElementIsClickable (WebElement webElement, int timeOutInSeconds)
     {
         WebDriverWait wait = new WebDriverWait(webDriver, timeOutInSeconds);
-        wait.until(ExpectedConditions.presenceOfElementLocated((By) webElement));
+        wait.until(ExpectedConditions.elementToBeClickable((By) webElement));
+        return webElement;
+    }
+
+    public WebElement waitUntilElementIsVisible (WebElement webElement, int timeOutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(webDriver, timeOutInSeconds);
+        wait.until(ExpectedConditions.visibilityOf(webElement));
         return webElement;
     }
 }
