@@ -4,8 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Error page after unsuccessful login
+ */
 public class LoginSubmitPage extends BasePage
 {
+    /**
+     * Constructor of Error page
+     * @param webDriver - webDriver instance
+     */
     public LoginSubmitPage(WebDriver webDriver)
     {
         super(webDriver);
@@ -32,11 +39,18 @@ public class LoginSubmitPage extends BasePage
     @FindBy(id = "session_password-login-error")
     private WebElement errorPasswordMessage;
 
+    /**
+     * Method for checking of displaying "General error message" text
+     * @return - returning of loaded element
+     */
     public boolean isPageLoaded()
     {
         return errorMessage.isDisplayed();
     }
 
+    /**
+     * Method for successful login on Error page
+     */
     public void login()
     {
         submitEmailField.clear();
@@ -46,41 +60,73 @@ public class LoginSubmitPage extends BasePage
         submitSignInButton.click();
     }
 
+    /**
+     * Method for checking of displaying "Sign in" button
+     *  @return - returning of displayed element
+     */
     public boolean isSignInButtonDisplayed()
     {
         return submitSignInButton.isDisplayed();
     }
 
+    /**
+     * Method to get text from General error message
+     * @return - returning of got text
+     */
     public String errorMessageText()
     {
         return errorMessage.getText();
     }
 
+    /**
+     * Method for checking of displaying "Email" field
+     * @return - returning of displayed element
+     */
     public boolean isSubmitEmailFieldDisplayed()
     {
         return submitEmailField.isDisplayed();
     }
 
+    /**
+     * Method for checking of displaying "Password" field
+     * @return - returning of displayed element
+     */
     public boolean isSubmitPasswordFieldDisplayed()
     {
         return submitPasswordField.isDisplayed();
     }
 
+    /**
+     * Method for checking of displaying "Error message" for "Email" field
+     * @return - returning of displayed element
+     */
     public boolean isErrorEmailMessageDisplayed()
     {
         return errorEmailMessage.isDisplayed();
     }
 
+    /**
+     * Method for getting of text of "Error message" for "Email" field
+     * @return - returning of got text
+     */
     public String isErrorEmailMessageTextDisplayed()
     {
         return errorEmailMessage.getText();
     }
 
+    /**
+     * Method for checking of displaying "Error message" for "Password" field
+     * @return - returning of displayed element
+     */
     public boolean isErrorPasswordMessageDisplayed()
     {
         return errorPasswordMessage.isDisplayed();
     }
 
+    /**
+     * Method for getting of text of "Error message" for "Password" field
+     * @return - returning of got text
+     */
     public String isErrorPasswordMessageTextDisplayed()
     {
         return errorPasswordMessage.getText();

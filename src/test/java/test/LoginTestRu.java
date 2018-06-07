@@ -10,7 +10,7 @@ import page.LoginSubmitPage;
 import static java.lang.Thread.sleep;
 
 
-public class LoginTest extends BaseTest
+public class LoginTestRu extends BaseTestRu
 {
     @DataProvider
     public Object[][] validDataProvider()
@@ -90,11 +90,11 @@ public class LoginTest extends BaseTest
     public void successfulLoginTest(String email, String password) throws InterruptedException
     {
         Assert.assertEquals(loginPage.getCurrentTitle(),
-                "LinkedIn: Log In or Sign Up",
+                "LinkedIn: Войти или зарегистрироваться",
                 "Login-Submit page Title is wrong!");
 
         Assert.assertEquals(loginPage.getCurrentUrl(),
-                "https://www.linkedin.com/",
+                "https://ru.linkedin.com/",
                 "Login-Submit page URL is wrong!");
 
         HomePage linkedinHomePage = loginPage.login(email, password);
@@ -119,11 +119,11 @@ public class LoginTest extends BaseTest
         sleep(3000);
 
         Assert.assertEquals(loginPage.getCurrentTitle(),
-                "LinkedIn: Log In or Sign Up",
+                "LinkedIn: Войти или зарегистрироваться",
                 "Login-Submit page Title is wrong!");
 
         Assert.assertEquals(loginPage.getCurrentUrl(),
-                "https://www.linkedin.com/",
+                "https://ru.linkedin.com/",
                 "Login-Submit page URL is wrong!");
 
         Assert.assertTrue(loginPage.isPageLoaded(),
@@ -140,7 +140,7 @@ public class LoginTest extends BaseTest
                 "Login Submit page isn't opened");
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(),
-                "Sign In to LinkedIn",
+                "Войти в LinkedIn",
                 "Login Submit page Title is wrong!!!");
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentUrl(),
@@ -148,7 +148,7 @@ public class LoginTest extends BaseTest
                 "Login Submit page Url is wrong!!!");
 
         Assert.assertEquals(linkedinLoginSubmitPage.errorMessageText(),
-                "There were one or more errors in your submission. Please correct the marked fields below.",
+                "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.",
                 "Error message text isn't displayed!!!");
 
         Assert.assertTrue(linkedinLoginSubmitPage.isSubmitEmailFieldDisplayed(),
@@ -160,14 +160,14 @@ public class LoginTest extends BaseTest
         if (linkedinLoginSubmitPage.isErrorEmailMessageDisplayed())
         {
             Assert.assertEquals(linkedinLoginSubmitPage.isErrorEmailMessageTextDisplayed(),
-                    "Please enter a valid email address.",
+                    "Укажите действительный адрес эл. почты.",
                     "Email Error message isn't displayed!!!");
         }
 
         if (linkedinLoginSubmitPage.isErrorPasswordMessageDisplayed())
         {
             Assert.assertEquals(linkedinLoginSubmitPage.isErrorPasswordMessageTextDisplayed(),
-                    "Hmm, that's not the right password. Please try again or request a new one.",
+                    "Это неверный пароль. Повторите попытку или измените пароль.",
                     "Error Password message isn't displayed or wrong!!!");
         }
 
@@ -182,7 +182,7 @@ public class LoginTest extends BaseTest
         sleep(3000);
 
         Assert.assertEquals(linkedinLoginSubmitPage.isErrorEmailMessageTextDisplayed(),
-                "Please enter a valid email address.",
+                "Укажите действительный адрес эл. почты.",
                 "Email Error message isn't displayed!!!");
     }
 
@@ -195,7 +195,7 @@ public class LoginTest extends BaseTest
         sleep(3000);
 
         Assert.assertEquals(loginSubmitPage.isErrorPasswordMessageTextDisplayed(),
-                "Hmm, that's not the right password. Please try again or request a new one.",
+                "Это неверный пароль. Повторите попытку или измените пароль.",
                 "Error Password message isn't displayed or wrong!!!");
     }
 

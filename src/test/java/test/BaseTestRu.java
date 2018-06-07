@@ -13,16 +13,16 @@ import page.LoginPage;
 
 import static java.lang.Thread.sleep;
 
-public class BaseTest
+public class BaseTestRu
 {
-    public WebDriver webDriver;
-    public LoginPage loginPage;
-    public String userEmail = "skravchenko@adyax.com";
-    public String newUserPassword = "P@ssword2";
+    WebDriver webDriver;
+    LoginPage loginPage;
+    String userEmail = "skravchenko@adyax.com";
+    String newUserPassword = "P@ssword2";
 
     @Parameters({"browserType", "envURL"})
     @BeforeMethod
-    public void before(@Optional("chrome") String browserType, @Optional("https://www.linkedin.com/") String envURL) throws InterruptedException
+    public void before(@Optional("chrome") String browserType, @Optional("https://ru.linkedin.com/") String envURL) throws InterruptedException
     {
         switch (browserType.toLowerCase())
         {

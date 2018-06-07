@@ -2,10 +2,27 @@
 
 <suite name="Linkedin Login">
 
-    <test name="Login Tests">
+    <test name="Login Tests Chrome">
+        <parameter name="browserType" value="Chrome"/>
+        <parameter name="envURL" value="https://www.linkedin.com/" />
         <classes>
             <class name="test.LoginTest" />
+            <class name="test.LoginTestRu" />
+            <class name="test.LoginTestUa" />
+        </classes>
+    </test>
+
+    <test name="Login Tests Firefox">
+        <parameter name="browserType" value="Firefox"/>
+        <parameter name="envURL" value="https://www.linkedin.com/" />
+        <classes>
+            <class name="test.LoginTest" />
+            <class name="test.LoginTestRu" />
+            <class name="test.LoginTestUa" />
         </classes>
     </test>
 
 </suite>
+
+
+

@@ -10,7 +10,7 @@ import page.LoginSubmitPage;
 import static java.lang.Thread.sleep;
 
 
-public class LoginTest extends BaseTest
+public class LoginTestUa extends BaseTestUa
 {
     @DataProvider
     public Object[][] validDataProvider()
@@ -94,7 +94,7 @@ public class LoginTest extends BaseTest
                 "Login-Submit page Title is wrong!");
 
         Assert.assertEquals(loginPage.getCurrentUrl(),
-                "https://www.linkedin.com/",
+                "https://ua.linkedin.com/",
                 "Login-Submit page URL is wrong!");
 
         HomePage linkedinHomePage = loginPage.login(email, password);
@@ -123,7 +123,7 @@ public class LoginTest extends BaseTest
                 "Login-Submit page Title is wrong!");
 
         Assert.assertEquals(loginPage.getCurrentUrl(),
-                "https://www.linkedin.com/",
+                "https://ua.linkedin.com/",
                 "Login-Submit page URL is wrong!");
 
         Assert.assertTrue(loginPage.isPageLoaded(),

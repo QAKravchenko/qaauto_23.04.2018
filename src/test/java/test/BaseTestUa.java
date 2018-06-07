@@ -13,7 +13,7 @@ import page.LoginPage;
 
 import static java.lang.Thread.sleep;
 
-public class BaseTest
+public class BaseTestUa
 {
     public WebDriver webDriver;
     public LoginPage loginPage;
@@ -22,7 +22,7 @@ public class BaseTest
 
     @Parameters({"browserType", "envURL"})
     @BeforeMethod
-    public void before(@Optional("chrome") String browserType, @Optional("https://www.linkedin.com/") String envURL) throws InterruptedException
+    public void before(@Optional("chrome") String browserType, @Optional("https://ua.linkedin.com/") String envURL) throws InterruptedException
     {
         switch (browserType.toLowerCase())
         {
